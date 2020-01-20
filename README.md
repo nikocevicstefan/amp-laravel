@@ -2,6 +2,7 @@
 <img src="https://laravel.com/img/logomark.min.svg" width="50">
 <img src="https://laravel.com/img/logotype.min.svg" width="150"></p>
 <p align="center"></p>
-## AMP Laravel
+
+##AMP Laravel
 
 This project will be used for the laravel part of Amplitudo developer training
