@@ -19,8 +19,8 @@ class PasswordFilter
             if($request->header('X-Password') === 'Fortuna Major'){
                 return $next($request);
             }
-            abort(401, 'Incorrect Password');
+            return response()->json(['message'=>'Incorrect Password | 401'],401);
         }
-        abort(401, 'Incorrect Password');
+        return response()->json(['message'=>'Incorrect Password | 401'],401);
     }
 }
