@@ -33,3 +33,15 @@ Route::patch('/students/{id}', function(Request $request){
 Route::delete('/students/{id}', function($id){
     dd("Student ciji je ID:{$id} je obrisan.");
 })->middleware('passwordFilter');
+
+
+//The shorthand way of writing routes for this resource
+//Route::apiResource('/hotels', 'Api\HotelsController');
+
+//The long way of writing the routes for this resource
+Route::get('/hotels', 'Api\HotelsController@index');
+Route::get('/hotels/{hotel}', 'Api\HotelsController@show');
+Route::post('/hotels', 'Api\HotelsController@store');
+Route::patch('/hotels/{hotel}', 'Api\HotelsController@update');
+Route::delete('/hotels/{hotel}', 'Api\HotelsController@destroy');
+
