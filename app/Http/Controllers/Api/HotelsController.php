@@ -9,12 +9,12 @@ use Illuminate\Http\Request;
 class HotelsController extends Controller
 {
     public function index(){
-        $hotels = Hotel::all();
+        $hotels = Hotel::with('country')->get();
         return response()->json($hotels, 200);
     }
 
     public function show(Hotel $hotel){
-        return response()->json($hotel, 200);
+        return response()->json($hotel->load('country'), 200);
     }
 
     public function store(Request $request){

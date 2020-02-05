@@ -35,13 +35,8 @@ Route::delete('/students/{id}', function($id){
 })->middleware('passwordFilter');
 
 
-//The shorthand way of writing routes for this resource
-//Route::apiResource('/hotels', 'Api\HotelsController');
+Route::apiResource('/hotels', 'Api\HotelsController');
+Route::apiResource('/countries', 'Api\CountriesController');
 
-//The long way of writing the routes for this resource
-Route::get('/hotels', 'Api\HotelsController@index');
-Route::get('/hotels/{hotel}', 'Api\HotelsController@show');
-Route::post('/hotels', 'Api\HotelsController@store');
-Route::patch('/hotels/{hotel}', 'Api\HotelsController@update');
-Route::delete('/hotels/{hotel}', 'Api\HotelsController@destroy');
+
 

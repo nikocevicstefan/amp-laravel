@@ -20,8 +20,14 @@ class CreateHotelsTable extends Migration
             $table->unsignedInteger('star');
             $table->string('street_address');
             $table->string('city');
-            $table->string('country');
+            $table->unsignedBigInteger('country_id');
             $table->timestamps();
+
+            $table->foreign('country_id')
+                ->references('id')
+                ->on('countries')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 

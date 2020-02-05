@@ -12,6 +12,6 @@ $factory->define(Hotel::class, function (Faker $faker) {
         'star' => $faker->numberBetween(1,5),
         'street_address' => $faker->address,
         'city' => $faker->city,
-        'country' => $faker->country
+        'country_id' => $faker->numberBetween(1,4)
     ];
 });
