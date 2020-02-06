@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Hotel extends Model
 {
-    protected $guarded = [];
+    protected $guarded = ['id'];
 
     public function country(){
         return $this->belongsTo(Country::class);
