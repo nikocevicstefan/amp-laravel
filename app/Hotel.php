@@ -11,4 +11,12 @@ class Hotel extends Model
     public function country(){
         return $this->belongsTo(Country::class);
     }
+
+    public function roomTypes(){
+        return $this->hasMany(RoomType::class);
+    }
+
+    public function rooms(){
+        return $this->hasMany(Room::class);
+    }
 }
