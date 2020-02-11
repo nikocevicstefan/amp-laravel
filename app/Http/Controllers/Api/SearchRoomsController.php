@@ -32,6 +32,15 @@ class SearchRoomsController extends Controller
         /*To be implemented with reservation system
         if($request->has('check_in') && $request->has('check_out')){}*/
 
-        return response()->json(['rooms available' => $query->count()]);
+        //returns routes to available rooms
+        $roomsAvailable = $query->pluck('rooms.id')->toArray();
+        return response()->json(
+            [
+                'total' => sizeof($roomsAvailable),
+                'available_rooms' =>
+                array_map(function($id) use ($hotel){
+                    return "/api/hotels/{$hotel->id}/rooms/{$id}";
+                }, $roomsAvailable),
+            ]);
     }
 }
