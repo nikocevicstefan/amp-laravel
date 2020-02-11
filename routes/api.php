@@ -38,7 +38,7 @@ Route::delete('/students/{id}', function($id){
 Route::apiResource('/hotels', 'Api\HotelsController');
 Route::apiResource('/hotels/{hotel}/room-types', 'Api\RoomTypesController');
 Route::get('/hotels/{hotel}/rooms/search', 'Api\SearchRoomsController@search');
-Route::apiResource('/hotels/{hotel}/rooms', 'Api\RoomsController')->name('rooms');
+Route::apiResource('/hotels/{hotel}/rooms', 'Api\RoomsController');
 Route::apiResource('/countries', 'Api\CountriesController');
 
 
