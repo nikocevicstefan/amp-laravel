@@ -3,10 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class Hotel extends Model
+class Hotel extends Model implements HasMedia
 {
-    protected $guarded = ['id'];
+    use HasMediaTrait;
+    public $with = ['country', 'media'];
+    protected $guarded = ['id', 'pictures'];
 
     public function country(){
         return $this->belongsTo(Country::class);

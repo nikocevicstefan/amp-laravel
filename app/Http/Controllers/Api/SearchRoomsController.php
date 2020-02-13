@@ -25,6 +25,6 @@ class SearchRoomsController extends Controller
         if($request->has('check_in') && $request->has('check_out')){}*/
 
         $results = $query->get();
-        return response()->json($results);
+        return response()->json($results->load('media'));
     }
 }

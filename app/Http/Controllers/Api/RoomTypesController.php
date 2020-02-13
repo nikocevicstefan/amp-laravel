@@ -6,6 +6,7 @@ use App\Hotel;
 use App\Http\Controllers\Controller;
 use App\RoomType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoomTypesController extends Controller
 {
@@ -18,10 +19,17 @@ class RoomTypesController extends Controller
 
     public function store(Hotel $hotel, Request $request)
     {
-        $data = ['hotel_id'=>$hotel->id] + $request->all();
-        $roomType = RoomType::create($data);
+        return DB::transaction(function() use($hotel, $request){
+            $data = ['hotel_id'=>$hotel->id] + $request->all();
+            $roomType = new RoomType($data);
+            $roomType->save();
 
-        return response()->json($roomType, 201);
+            foreach($request->file('pictures') as $picture){
+                $roomType->addMedia($picture)->toMediaCollection('hotel');
+            }
+
+            return response()->json($roomType->load('media'), 201);
+        });
     }
 
     //using Request instead of route model binding {hotel} and {room_type} because the Hotel would be unused
@@ -34,11 +42,15 @@ class RoomTypesController extends Controller
 
     public function update(Request $request)
     {
-        $roomType = RoomType::findOrFail($request->route('room_type'));
+        return DB::transaction(function()use ($request){
+            $roomType = RoomType::findOrFail($request->route('room_type'));
+            $roomType->update($request->all());
 
-        $roomType->update($request->all());
-
-        return response()->json($roomType);
+            foreach($request->file('pictures', []) as $picture){
+                $roomType->addMedia($picture)->toMediaCollection();
+            }
+            return response()->json($roomType->load('media'));
+        });
     }
 
 
