@@ -19,7 +19,7 @@ class SearchRoomsController extends Controller
                 ->where('number_of_bathrooms', '>=', $request->get('min_bathrooms', 0))
                 ->where('max_capacity', '>=', $request->get('min_guests', 0))
                 ->withCount('rooms as available_rooms_count')
-                ->groupBy('max_capacity');
+                ->orderBy('max_capacity');
 
         /*To be implemented with reservation system
         if($request->has('check_in') && $request->has('check_out')){}*/
