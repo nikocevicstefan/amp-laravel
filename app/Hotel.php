@@ -9,7 +9,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class Hotel extends Model implements HasMedia
 {
     use HasMediaTrait;
-    public $with = ['country', 'media'];
+    public $with = ['country:id,name', 'media'];
     protected $guarded = ['id', 'pictures'];
 
     public function country(){

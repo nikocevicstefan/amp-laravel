@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Hotel;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RoomTypeResource;
 use App\RoomType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,7 @@ class RoomTypesController extends Controller
     public function index(Hotel $hotel)
     {
         $roomTypes = RoomType::where('hotel_id', $hotel->id)->get();
-        return response()->json($roomTypes);
+        return RoomTypeResource::collection($roomTypes);
     }
 
     public function store(Hotel $hotel, Request $request)
@@ -28,7 +29,7 @@ class RoomTypesController extends Controller
                 $roomType->addMedia($picture)->toMediaCollection('hotel');
             }
 
-            return response()->json($roomType->load('media'), 201);
+            return new RoomTypeResource($roomType);
         });
     }
 
@@ -36,7 +37,7 @@ class RoomTypesController extends Controller
     public function show(Request $request)
     {
         $roomType = RoomType::find($request->route('room_type'));
-        return response()->json($roomType, 200);
+            return new RoomTypeResource($roomType);
     }
 
 
@@ -49,7 +50,7 @@ class RoomTypesController extends Controller
             foreach($request->file('pictures', []) as $picture){
                 $roomType->addMedia($picture)->toMediaCollection();
             }
-            return response()->json($roomType->load('media'));
+            return new RoomTypeResource($roomType);
         });
     }
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Country;
+use App\Http\Resources\CountryResource;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -12,20 +13,20 @@ class CountriesController extends Controller
     public function index()
     {
         $countries = Country::all();
-        return response()->json($countries);
+        return CountryResource::collection($countries);
     }
 
     public function store(Request $request)
     {
         $country = Country::create($request->all());
 
-        return response()->json($country, 201);
+        return new CountryResource($country);
     }
 
 
     public function show(Country $country)
     {
-        return response()->json($country);
+        return new CountryResource($country);
     }
 
 
@@ -33,7 +34,7 @@ class CountriesController extends Controller
     {
         $country->fill($request->all());
         $country->save();
-        return response()->json($country);
+        return new CountryResource($country);
     }
 
 

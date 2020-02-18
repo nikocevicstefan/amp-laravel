@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Hotel;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RoomResource;
 use App\Room;
 use Illuminate\Http\Request;
 
@@ -11,12 +12,13 @@ class RoomsController extends Controller
 {
     public function index(Hotel $hotel){
         $rooms = Room::where('hotel_id', $hotel->id)->get();
-        return response()->json($rooms);
+        return RoomResource::collection($rooms);
     }
 
     public function store(Request $request, Hotel $hotel){
         $data = ['hotel_id' => $hotel->id] + $request->all();
-        $room = Room::create($data);
+        $room = new Room($data);
+        $room->save();
 
         return response()->json($room, 201);
     }
