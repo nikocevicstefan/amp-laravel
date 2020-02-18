@@ -17,7 +17,7 @@ class RequestAccessTokenController extends Controller
            abort(401, 'invalid credentials');
         }
 
-        return([
+        return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL()
