@@ -24,6 +24,7 @@ class RoomsController extends Controller
     //using Request instead of route model binding {hotel} and {room} because the Hotel would be unused
     public function show(Request $request){
         $room = Room::findOrFail($request->route('room'))->load('roomType');
+
         return response()->json($room);
     }
 
