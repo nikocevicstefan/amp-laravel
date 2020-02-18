@@ -20,6 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/auth/token', 'Api\Auth\RequestAccessTokenController@getToken');
 Route::post('/auth/token/refresh', 'Api\Auth\RefreshAccessTokenController@refreshToken');
 
+Route::get('/hotels/search', 'Api\SearchHotelsController@search');
 Route::apiResource('/hotels', 'Api\HotelsController');
 Route::apiResource('/hotels/{hotel}/room-types', 'Api\RoomTypesController');
 Route::get('/hotels/{hotel}/rooms/search', 'Api\SearchRoomsController@search');

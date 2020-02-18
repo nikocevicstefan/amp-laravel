@@ -24,7 +24,7 @@ class HotelResource extends JsonResource
             'country' =>
                 [
                     'id' => $this->country_id,
-                    'name' => $this->country->name,
+                    'alpha2' => $this->country->alpha2,
                 ],
             'created_at' => $this->created_at->format('d-m-Y H:i:s'),
             'media' => MediaResource::collection($this->whenLoaded('media'))
