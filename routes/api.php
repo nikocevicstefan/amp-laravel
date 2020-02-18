@@ -17,23 +17,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/students', function(){
-    $data['students'] = ['stefan', 'miljan', 'mitja', 'vojkan', 'luka'];
-    return $data;
-})->middleware('passwordFilter');
-
-Route::post('/students', function(Request $request){
-    return $request->all();
-})->middleware('passwordFilter');
-
-Route::patch('/students/{id}', function(Request $request){
-    return $request->all();
-})->middleware('passwordFilter');
-
-Route::delete('/students/{id}', function($id){
-    dd("Student ciji je ID:{$id} je obrisan.");
-})->middleware('passwordFilter');
-
+Route::post('/auth/token', 'Api\Auth\RequestAccessTokenController@getToken');
+Route::post('/auth/token/refresh', 'Api\Auth\RefreshAccessTokenController@refreshToken');
 
 Route::apiResource('/hotels', 'Api\HotelsController');
 Route::apiResource('/hotels/{hotel}/room-types', 'Api\RoomTypesController');
