@@ -16,7 +16,7 @@ class MediaResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'url' => $this->filename,
+            'url' => $this->getUrl(),
             'order_column' => $this->order_column
         ];
     }
