@@ -18,8 +18,9 @@ class SearchHotelsController extends Controller
                         ->where('number_of_rooms', '>=', $request->get('min_rooms', 0))
                         ->where('number_of_bathrooms', '>=', $request->get('min_bathrooms', 0))
                         ->where('max_capacity', '>=', $request->get('min_guests', 0))
-                        ->withCount('rooms as available_rooms_count')->paginate(2);
-
-        return HotelResource::collection($hotels);
+                        ->withCount('rooms as available_rooms_count')->paginate($request->get('per_page', 2));
+        return HotelResource::collection($hotels->appends($_GET));
     }
+
+qq
 }
