@@ -22,5 +22,4 @@ class SearchHotelsController extends Controller
         return HotelResource::collection($hotels->appends($_GET));
     }
 
-qq
 }
